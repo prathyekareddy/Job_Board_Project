@@ -1,0 +1,807 @@
+body {
+  background-color: rgb(236, 238, 239);
+  /* padding-top: 50px; */
+  /* padding-bottom: 50px; */
+}
+label {
+  font-size: 18px;
+}
+img {
+  max-width: 100%;
+}
+input[type='file'] {
+  display: inline-block;
+}
+#file {
+  text-align: center;
+}
+label {
+  font-weight: 200;
+}
+button {
+  background-color: rgb(60, 120, 207);
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+.bg-white {
+  background-color: #ffffff;
+  padding: 30px;
+}
+
+.profile-card .box {
+  background-color: #ffffff;
+  padding: 30px;
+}
+.image-box {
+  text-align: center;
+}
+.image-box img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  object-position: center;
+}
+.jobTitle {
+  font-size: 24px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+.complanyName {
+  font-size: 14px;
+  opacity: 0.65;
+  margin: 0;
+}
+.salaryRange {
+  margin-top: 15px;
+  color: rgb(205, 102, 95);
+}
+.address {
+  margin-top: 15px;
+}
+.map-pin {
+  width: 25px;
+}
+.description {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  opacity: 0.75;
+}
+.tag {
+  border: 1px solid rgb(168, 213, 232);
+  color: rgb(168, 213, 232);
+  border-radius: 30px;
+  padding: 5px 10px;
+  font-size: 10px;
+}
+.upper,
+.lower {
+  opacity: 0;
+  visibility: hidden;
+}
+.search {
+  display: block;
+  background: rgb(116, 182, 102);
+  width: 100%;
+}
+
+input#homeSearchBar {
+  width: 100%;
+  /*  height: 40px;*/
+  text-align: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+div#filteredSearch {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+/**
+ * FilePond Custom Styles
+ */
+.filepond--drop-label {
+  color: #4c4e53;
+}
+
+.filepond--label-action {
+  text-decoration-color: #babdc0;
+}
+
+.filepond--panel-root {
+  border-radius: 2em;
+  background-color: #edf0f4;
+  height: 1em;
+}
+
+.filepond--item-panel {
+  background-color: #595e68;
+}
+
+.filepond--drip-blob {
+  background-color: #7f8a9a;
+}
+
+.filepond--root {
+  /* min-height: 80px; */
+  width: 100%;
+  min-width: 270px;
+}
+
+.filepond--credits {
+  display: none;
+}
+
+.remove-Work, .remove-project, .remove-education {
+  position: absolute;
+  background-color: #ff572226;
+  color: #ff5722;
+  padding: 1px 10px;
+  display: inline-block;
+  border-radius: 15px;
+  right: 0;
+  cursor: pointer;
+}
+
+.remove-Work:hover ,.remove-project:hover , .remove-education:hover  {
+  background-color: rgb(226, 116, 116);
+  color: #ffffff;
+}
+
+.filepond--root {
+  min-height: 78px;
+}
+
+.toggleHold {
+  display: inline-block;
+}
+
+.toggleHold input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(22px);
+}
+
+/* Rounded sliders */
+.toggleHold .slider.round {
+  border-radius: 34px;
+  height: 26px;
+  width: 48px;
+}
+
+.toggleHold .slider.round:before {
+  border-radius: 50%;
+}
+
+.hidden {
+  display: none;
+}
+
+.toggleHold {
+  display: inline-block;
+}
+
+.toggleHold .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggleHold .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleHold .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(60, 120, 207);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.toggleHold .slider:before {
+  position: absolute;
+  content: '';
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.toggleHold input:checked + .slider {
+  background-color: #cf943c;
+}
+
+.toggleHold input:focus + .slider {
+  box-shadow: 0 0 1px #cf943c;
+}
+
+.toggleHold input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(22px);
+}
+
+/* Rounded sliders */
+.toggleHold .slider.round {
+  border-radius: 34px;
+  height: 26px;
+  width: 48px;
+}
+
+.toggleHold .slider.round:before {
+  border-radius: 50%;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  /*    font-size: 22px;*/
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container .input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+div.job-info li {
+  list-style: none;
+  background-image: none;
+  background-repeat: none;
+  background-position: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+li {
+  background-repeat: no-repeat;
+  background-position: 0px 5px;
+  padding-left: 14px;
+}
+
+.toggleHold .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleHold .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(60, 120, 207);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.toggleHold .slider:before {
+  position: absolute;
+  content: '';
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.toggleHold input:checked + .slider {
+  background-color: #cf943c;
+}
+
+.toggleHold input:focus + .slider {
+  box-shadow: 0 0 1px #cf943c;
+}
+
+.toggleHold input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(22px);
+}
+
+/* Rounded sliders */
+.toggleHold .slider.round {
+  border-radius: 34px;
+  height: 26px;
+  width: 48px;
+}
+
+.toggleHold .slider.round:before {
+  border-radius: 50%;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  /*    font-size: 22px;*/
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container .input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+#getUserType {
+  margin-right: 39px;
+}
+
+input#categoryInputFilter {
+  display: none;
+}
+
+input#minimumSalaryFilter {
+  display: none;
+}
+
+input#projectNumberFilter {
+  display: none;
+}
+
+button#revealProjectNumber {
+  margin-bottom: 10px;
+}
+
+#categoryInputFilter {
+  display: none;
+}
+
+#minimumSalaryFilter {
+  display: none;
+}
+
+.justify-center {
+  justify-content: center !important;
+  text-align: center;
+  padding: 30px !important;
+}
+#navv-bar {
+  margin-top: 30px;
+}
+.auction-login {
+  margin-top: 30px;
+}
+
+#searchInput {
+  flex-grow: 1;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.searchContainer {
+  display: flex;
+  padding: 20px;
+  align-items: baseline;
+}
+#homeSearchBarErrorState,
+#error-password {
+  color: rgb(253, 95, 95);
+  font-size: 12px;
+  font-weight: 300;
+}
+
+#error-username {
+  color: rgb(253, 95, 95);
+  font-size: 12px;
+  font-weight: 300;
+}
+
+#error-email {
+  color: rgb(253, 95, 95);
+  font-size: 12px;
+  font-weight: 300;
+}
+#navigationUnauthPartial #navv-bar {
+  margin-top: 0px;
+}
+#loginnnCOntainer .navbar {
+  justify-content: center !important;
+  text-align: center;
+}
+#log {
+  margin-top: 30px;
+}
+#loginField {
+  padding: 50px;
+  background: #f8f9fa !important;
+  border-radius: 8px;
+}
+.signupButton {
+  margin-top: 30px;
+  font-size: 16px;
+}
+.signupButton a {
+  font-weight: 600;
+  color: rgb(60, 120, 207) !important;
+}
+.auction-login {
+  margin-bottom: 20px;
+}
+#signupContainer {
+  margin-top: 30px;
+  font-size: 18px;
+}
+.signup-form #form {
+  display: block;
+  width: 600px;
+  padding: 30px;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #f8f9fa !important;
+}
+
+.error {
+  color: red;
+}
+#sam,
+.subAction {
+  margin-top: 20px;
+}
+
+#education-wrapper .clone,
+#project-wrapper .clone,
+#work-information-wrapper .clone {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed #cdcdcd;
+  margin-bottom: 20px;
+}
+#job-wrapper > div {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  padding-top: 20px;
+  border-top: 1px dashed #cdcdcd;
+  margin-top: 20px;
+}
+#aboutUsContainer,
+#searchContainer {
+  position: relative;
+}
+
+#aboutUsContainer #signOut a,
+#searchContainer #signOut a {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: inline-block;
+}
+#aboutUsContainer #signOut a button,
+#searchContainer #signOut a button {
+  background: red;
+}
+#filterContainer {
+  margin-top: 50px;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#card-holder {
+  top: 5em;
+  margin-right: 15%;
+  z-index: 2;
+  /* border-radius: 20px; */
+  background-color: #ffffff;
+}
+
+#card-holder:hover {
+  transition: 0.2s;
+  transform: scale(1.1) translate(5%, 5%);
+}
+
+.social-link {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  border-radius: 50%;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+.social-link:hover,
+.social-link:focus {
+  background: #ddd;
+  text-decoration: none;
+  color: #555;
+}
+
+
+.site-footer
+{
+  background-color:#26272b;
+  padding: 10px 5px 5px 10px;
+  bottom: 0;
+  width: 100%;
+  color:#737373;
+  position: fixed;
+}
+.site-footer hr
+{
+  border-top-color:#bbb;
+  opacity:0.5
+}
+.site-footer hr.small
+{
+  margin:20px 0
+}
+.site-footer h6
+{
+  color:#fff;
+  font-size:16px;
+  text-transform:uppercase;
+  margin-top:5px;
+  letter-spacing:2px
+}
+.site-footer a
+{
+  color:#737373;
+}
+.site-footer a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links
+{
+  padding-left:0;
+  list-style:none
+}
+.footer-links li
+{
+  display:block
+}
+.footer-links a
+{
+  color:#737373
+}
+.footer-links a:active,.footer-links a:focus,.footer-links a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links.inline li
+{
+  display:inline-block
+}
+.site-footer .social-icons
+{
+  text-align:right
+}
+.site-footer .social-icons a
+{
+  width:40px;
+  height:40px;
+  line-height:40px;
+  margin-left:6px;
+  margin-right:0;
+  border-radius:100%;
+  background-color:#33353d
+}
+.copyright-text
+{
+  margin:0
+}
+@media (max-width:991px)
+{
+  .site-footer [class^=col-]
+  {
+    margin-bottom:30px
+  }
+}
+@media (max-width:767px)
+{
+  .site-footer
+  {
+    padding-bottom:0
+  }
+  .site-footer .copyright-text,.site-footer .social-icons
+  {
+    text-align:center
+  }
+}
+.social-icons
+{
+  padding-left:0;
+  margin-bottom:0;
+  list-style:none
+}
+.social-icons li
+{
+  display:inline-block;
+  margin-bottom:4px
+}
+.social-icons li.title
+{
+  margin-right:15px;
+  text-transform:uppercase;
+  color:#96a2b2;
+  font-weight:700;
+  font-size:13px
+}
+.social-icons a{
+  background-color:#eceeef;
+  color:#818a91;
+  font-size:16px;
+  display:inline-block;
+  line-height:44px;
+  width:44px;
+  height:44px;
+  text-align:center;
+  margin-right:8px;
+  border-radius:100%;
+  -webkit-transition:all .2s linear;
+  -o-transition:all .2s linear;
+  transition:all .2s linear
+}
+.social-icons a:active,.social-icons a:focus,.social-icons a:hover
+{
+  color:#fff;
+  background-color:#29aafe
+}
+.social-icons.size-sm a
+{
+  line-height:34px;
+  height:34px;
+  width:34px;
+  font-size:14px
+}
+.social-icons a.facebook:hover
+{
+  background-color:#3b5998
+}
+.social-icons a.twitter:hover
+{
+  background-color:#00aced
+}
+.social-icons a.linkedin:hover
+{
+  background-color:#007bb6
+}
+.social-icons a.dribbble:hover
+{
+  background-color:#ea4c89
+}
+@media (max-width:767px)
+{
+  .social-icons li.title
+  {
+    display:block;
+    margin-right:0;
+    font-weight:600
+  }
+}
+
+div#jobCategory{
+  margin-bottom: 15px;
+}

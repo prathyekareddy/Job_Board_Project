@@ -1,0 +1,40 @@
+
+<div class="container">
+    <div class="row">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <img id="card-image-top" src="/public/uploads/companyFiles/profilePictures/{{company.lowercaseUsername}}_profilePicture.jpeg" onerror="this.onerror=null;this.src='https://png.pngtree.com/element_our/20200609/ourmid/pngtree-children-s-software-programming-image_2230761.jpg';" alt="Card Image cap"/>
+                    <div class="card-body">
+                        <h2 class="card-title d-flex justify-content-center" style="font-weight: 625;">Company: {{company.companyName}}</h2>
+                        <h4 class="card-title d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">Location: {{company.location}}</h4>
+                        <h4 class="card-title d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">Category: {{company.category}}</h4>
+                        <h5 class="card-subtitle d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">HR Contact Email: {{company.hrEmail}}</h5>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="container">
+                    <div class="card-deck">
+                            <div class="col-6   " style="padding-bottom: 50px;">
+                                    <div class="card">
+                                        <img style="border-radius: 50% ; padding: 30px 80px 20px 80px" class="card-img-top" src="/public/uploads/companyFiles/profilePictures/{{company.lowercaseUsername}}_profilePicture.jpeg" onerror="this.onerror=null;this.src='https://png.pngtree.com/element_our/20200609/ourmid/pngtree-children-s-software-programming-image_2230761.jpg';" alt="Card Image cap"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-left">{{jobDetails.jobTitle}}</h5>
+                                            <h6 class="card-subtitle d-flex justify-content-left" style="font-weight: lighter; color: lightcoral">Company: {{company.companyName}}</h6>
+                                            <h5 class="card-title d-flex justify-content-left" style="font-size: medium;">Salary range: ${{jobDetails.salaryMin}} - ${{jobDetails.salaryMax}} </h5>
+                                            <p class="card-subtitle text-muted d-flex justify-content-left" style="font-size: medium;">Location: {{jobDetails.jobLocation}}</p>
+                                            <p class="card-text d-flex justify-content-left">Description: {{jobDetails.jobDescription}}</p>
+                                            {{#each jobDetails.skills}}
+                                                <span class="badge badge-pill badge-info" style="font-size: small;" >{{this}}</span>
+                                            {{/each}}
+                                            <button style="width: 218px; height: 65px; font-size:16px; margin-top: 10px;" onclick="document.location.href='/profile/company/{{company._id}}'">View Profile of Hiring Company</button>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>

@@ -1,0 +1,25 @@
+        <h1 class = "first">{{currentHeader}}</h1>
+        <div class = "divForm">
+            <form action="/login" method="POST" class="employee-login-form">
+            <label id = "form">
+                Username:
+                <br>
+                <input type="text" id="username" name="username" placeholder="Username" value="{{login.username}}" class="full-width-input"/>
+                Password:
+                <br>
+                <input type="password" id="password" name="password" placeholder="Password" value="{{login.password}}" class="full-width-input"/>
+            </label>
+            <br>
+            <br>
+            <button class="btnLogin" type="submit">Log in</button>
+            <button class="btnSignUp" type="TO BE DECIDED">Sign Up</button>
+            </form>
+        </div>
+        <div id="message">
+            <h3>Password must contain the following:</h3>
+            <p id="letter" class="invalid">A lowercase letter</p>
+            <p id="capital" class="invalid">A capital letter</p>
+            <p id="number" class="invalid">A number</p>
+            <p id="length" class="invalid">Minimum 8 characters</p>
+        </div>
+        <script src="/public/login.js"></script>

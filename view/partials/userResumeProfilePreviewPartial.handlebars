@@ -1,0 +1,48 @@
+<div class="container Large shadow" id="card-holder">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- <img id="card-image-top" src="https://png.pngtree.com/element_our/20200609/ourmid/pngtree-children-s-software-programming-image_2230761.jpg" alt="Card Image cap"/> -->
+            <img id="card-image-top" src="/public/uploads/employeeFiles/profilePictures/{{user.lowercaseUsername}}_profilePicture.jpeg" onerror="this.onerror=null;this.src='https://png.pngtree.com/element_our/20200609/ourmid/pngtree-children-s-software-programming-image_2230761.jpg';" alt="Card Image cap"/>
+
+        </div>
+        <div class="col-md-6">
+            <div class="card-body">
+                <h2 class="card-title d-flex justify-content-left" style="font-weight: 625;">{{user.name.fullName}}</h2>
+                <br>
+                <h4 class="card-title d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">Phone Number: {{user.phoneNumber}}</h4>
+                <h4 class="card-title d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">About Me: {{user.aboutMe}}</h4>
+                <h5 class="card-subtitle d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">Contact Email: {{user.email}}</h5>
+                <br>
+                <!--<button style="width: 218px; height: 65px; font-size:16px; margin-top: 10px;" onclick="document.location.href='/profile/user/{{user._id}}'">View Profile of {{user.name.fullName}}</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="container">
+                    <div class="card-deck">
+                            <div class="col-6   " style="padding-bottom: 50px;">
+                                    <div class="card">
+                                        <img style="border-radius: 50% ; padding: 30px 80px 20px 80px" class="card-img-top" src="/public/uploads/employeeFiles/profilePictures/{{user.lowercaseUsername}}_profilePicture.jpeg" onerror="this.onerror=null;this.src='https://png.pngtree.com/element_our/20200609/ourmid/pngtree-children-s-software-programming-image_2230761.jpg';" alt="Card Image cap"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-left">{{user.fullName}}</h5>
+                                            <h6 class="card-subtitle d-flex justify-content-left" style="font-weight: lighter; color: lightcoral">Description: {{userResume.description}}</h6>
+                                            <p class="card-subtitle text-muted d-flex justify-content-left" style="font-size: medium;">Current Working Status: {{userResume.workStatus}}</p>
+                                            
+                                            {{#each resume.skills}}
+                                                <span class="badge badge-pill badge-info" style="font-size: small;" >{{this}}</span>
+                                            {{/each}}
+                                            <button style="width: 218px; height: 65px; font-size:16px; margin-top: 10px;" onclick="document.location.href='/profile/user/{{user._id}}'">View Profile of Hiring Company</button>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>

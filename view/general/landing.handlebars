@@ -1,0 +1,15 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-center">
+        {{#if auth}}
+        {{> navigationAuthPartial }}
+        {{else}}
+        {{> navigationUnauthPartial }}
+        {{/if}}
+</nav>
+
+    <div id="landingPage">
+        <div id="searchBar">
+            {{> generalSearchPartial }}
+        </div>
+    </div>
+

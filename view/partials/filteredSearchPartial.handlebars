@@ -1,0 +1,84 @@
+<div id="filterContainer"> 
+<form action="/search/filter" method="POST" id="filteredSearchForm">
+    <h4>STEMConnect Filtered Search</h4>
+    {{#if isUser}}
+        <p>Welcome to the STEMConnect Filtered Search. Use this feature to find jobs that fit your qualifications.</p>
+        <p>Please enter your number of years of experience, skills you have, and optionally the category of job or minimum job salary you want.</p>
+    {{else}}
+        <p>Welcome to the STEMConnect Filtered Search. Use this feature to find applicants that fit your job needs.</p>
+        <p>Please enter the minimum number of years of experience in industry, the skills required to do the job, and optionally the number of personal projects the applicant has worked on to get connected to different applicants that fit your needs.</p>
+    {{/if}}
+        <div class="min-max-slider" data-legendnum="2">
+            <div class="form-group">
+            <label >Years Experience</label>
+                <input id="yearsExpSlider" class="min" name="yearsExp" type="range" step="1" min="0" max="30"  />
+                <input id="yearsExpInput" name="yearsExp" type="number" min="0" max="30" >
+            
+                </div>
+        </div>  
+    <div class="form-group">
+        <label >Skills</label>
+        <input  class="form-control" id="skillsLookUp" name="skillsLookup" type="text" placeholder="Skills"/>
+        </div>
+        <div id="skillsList">
+            <h4 id="skillsHeading"></h4>
+            <ul id="insertedSkills"></ul>
+        </div>
+    <br/>
+    <br/>
+        {{#if isUser}}
+         <p>Optional Filter Categories</p>
+        <div id="jobCategory">
+            <button type="button" id="revealCategory">Filter by Job Category</button>
+            <div id="categoryInputFilter">
+                <label for="categoryLookUp">Job Category</label>
+                <input id="categoryLookUp" name="categoryLookup" type="text" placeholder="Job category"/>
+                <button type="button" id="removeCategory">Remove Job Filter</button>
+            </div>
+        </div>
+        <div id="minSalary">
+            <button type="button" id="revealMinSalary">Filter by Minimum Salary</button>
+            <div id="minimumSalaryFilter" class="min-max-slider" data-legendnum="2">
+                <label for="minSalary">Years Experience
+                    <input id="minSalarySlider" class="min" name="minSalary" type="range" step="1000" min="20000" max="500000"  />
+                    <input id="minSalaryInput" name="minSalary" type="number" min="20000" max="500000"/>
+                </label>
+                <button type="button" id="removeMinSalary">Remove Salary Filter</button>
+            </div>
+            <div class="my-3">
+            <button type="submit">Search</button>
+            </div>
+            <br/>
+            <div id="filteredSearchBarErrorState"></div>       
+        
+        </div>
+        {{else}}
+        <div id="projectNumber">
+            <button type="button" id="revealProjectNumber">Filter by Number of Personal Projects</button>
+            <br/>
+            <div id="projectNumberFilter" class="my-3 min-max-slider" data-legendnum="2">
+                <div class="form-group">
+                <label >Number of Personal Projects on Resume</label>
+                    <input id="projectNumberSlider" class="min" name="projectNumber" type="range" step="1" min="0" max="20" />
+                    <input id="projectNumberInput" name="projectNumber" type="number" min="1" max="20" class="form-control"/>
+                
+                    </div>
+                <br/>
+                <button type="button" id="removeProjectNumber">Remove Personal Project Filter</button>
+                <br/>
+            </div>
+            <div class="my-3">
+            <button type="submit">Search</button>
+                </div>
+        <br/>
+        <div id="filteredSearchBarErrorState"></div>       
+        <br/>
+        </div>
+        {{/if}}
+
+
+
+        
+    </form>
+</div>
+<script src="/public/js/filteredSearch.js"></script>

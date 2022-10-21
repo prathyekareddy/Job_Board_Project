@@ -1,0 +1,465 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        {{#if auth}}
+        {{> navigationAuthPartial }}
+        {{else}}
+        {{> navigationUnauthPartial }}
+        {{/if}}
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card Larger shadow" style="width: 18rem;">
+                <div class="card-body">
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#uploadPicture" style="position: absolute; border-radius:40px;">
+                    Edit Image
+                    </button>
+                    {{!-- <img id="card-image-top" src="public/uploads/companyFiles/profilePictures/{{company.username}}_profilePicture.jpeg" alt="Card Image cap"/> --}}
+                    <img class="card-img-top" src="public/uploads/companyFiles/profilePictures/{{company.username}}_profilePicture.jpeg" alt="No Image Found" style="position: static;">
+                    <div class="card-body">
+                        <h2 class="card-title d-flex justify-content-center" style="font-weight:bold;">{{company.companyName}}</h2>
+                        <h4 class="card-title d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">{{company.location}}</h4>
+                        <h4 class="card-title d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">{{company.category}}</h4>
+                        <h5 class="card-subtitle d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">{{company.hrEmail}}</h5>
+                        <br>
+                        <a href="/logout" class="btn btn-outline-dark d-flex justify-content-center" role="button" aria-pressed="true">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#companyInfoModal">
+                    Edit Company Information
+                </button>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-6 col-md-4">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jobInfoModal">
+                        Edit Job Information
+                    </button>
+                </div>
+                <div id="jobs-wrapper" class="col-6 col-md-4">
+                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#jobAddModal">Add Jobs</button>
+                </div>
+                <div class="container">
+                    <div class="card-deck">
+                        {{#each company.jobDetails}}
+                            {{#if this.jobStatus}}
+                            <div class="col-6   " style="padding-bottom: 50px;">
+                                    <div class="card Larger shadow">
+                                        <img style="border-radius: 50% ; padding: 30px 80px 20px 80px" class="card-img-top" src="public/uploads/companyFiles/profilePictures/{{../company.username}}_profilePicture.jpeg" alt="Card Image cap"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-left">{{this.jobTitle}}</h5>
+                                            <h6 class="card-subtitle d-flex justify-content-left" style="font-weight: lighter; color: lightcoral">{{../company.companyName}}</h6>
+                                            <h5 class="card-title d-flex justify-content-left" style="font-size: medium;">{{this.salaryMin}} - {{this.salaryMax}} </h5>
+                                            <p class="card-subtitle text-muted d-flex justify-content-left" style="font-size: medium;">{{this.jobLocation}}</p>
+                                            <p class="card-text d-flex justify-content-left">{{this.jobDescription}}</p>
+                                            {{#each this.skills}}
+                                                <span class="badge badge-pill badge-info" style="font-size: small;" >{{this}}</span>
+                                            {{/each}}
+                                            <form action="/profile/deleteJob" method="post">
+                                                <input type="hidden" name="jobid"  value="{{this._id}}"/>
+                                                <input type="hidden" name="companyid"  value="{{../company._id}}"/>
+                                                <button class="btn btn-danger" type="submit">Delete Job</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/if}}
+                        {{/each}}
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+
+
+{{!-- Modal to edit image information --}}
+<div class="modal fade" id="uploadPicture" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Select New Profile Picture</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex justify-content-center">
+        <form action="/profile/updatePicture" method="post" enctype="multipart/form-data">
+            <input type='file' class="form-control-file"  name="profilePicture" id="profilePicture" accept=".jpeg">
+            <button type="submit">Confirm Upload</button>
+        </form>
+      </div>
+      {{!-- <div class="modal-footer">   
+      </div> --}}
+    </div>
+  </div>
+</div>
+
+
+{{!-- Modal to update company information --}}
+<div class="modal fade" id="companyInfoModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Edit Company Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form  action="/profile/editCompanyInfo" method="POST">
+                    <input type="hidden" name="companyId" id="companyId" value="{{company._id}}"/>
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" class="form-control" id="companyName" name="companyName" value="{{company.companyName}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="hrEmail">HR EMail</label>
+                        <input type="text" class="form-control" id="hrEmail" name="hrEmail" 
+                            value={{company.hrEmail}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Company Category</label>
+                        <input type="text" class="form-control" id="category" name="category" value="{{company.category}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" value="{{company.location}}">
+                    </div>
+                    <div class="modal-footer">
+                        {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                        <div class="col-md-12 d-flex justify-content-end p-2 px-3">
+                            <button class="btn btn-primary px-5"  type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        
+                            <button class="btn btn-primary px-5" type="submit">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{!-- Modal to update job information --}}
+<div class="modal fade bd-example-modal-lg" id="jobInfoModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Edit Job Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{#each company.jobDetails}}
+                    <form class="jobForms" action="/profile/editJob" method="POST">
+                        <div class="bootstrap-switch-square">
+                            <input type="checkbox" data-toggle="switch" name="jobDetails[jobStatus]" value="true"  />
+                        </div>
+                        <h2>{{this.description}}</h2>
+                        <input type="hidden" name="jobDetails[companyId]" value="{{../company._id}}"/>
+                        <input type="hidden" name="jobDetails[id]"  value="{{this._id}}"/>
+                        <div class="form-group">
+                            <label >Job Title</label>
+                            <input class="jobTitle form-control" type="text"  name="jobDetails[jobTitle]" value="{{this.jobTitle}}">
+                            <div class="error-jobTitle" ></div>
+                        </div>
+                        <div class="form-group">
+                            <label >Location</label>
+                            <input class="jobLocation form-control" type="text"   name="jobDetails[jobLocation]" value="{{this.jobLocation}}">
+                            <div class="error-jobLocation"></div>
+                        </div>
+                        <div class="form-group">
+                            <label >Description</label>
+                            <input class="jobDescription form-control" type="text"  name="jobDetails[jobDescription]" value="{{this.jobDescription}}">
+                            <div class="error-jobDescription"></div>
+                        </div>
+                        <div class="form-group">
+                            <label >Years of Experience</label>
+                            <input class="yearsOfExperience form-control" type="number"      name="jobDetails[yearsOfExperience]" value={{this.yearsOfExperience}}>
+                            <div class="error-yearsOfExperience"></div>
+
+                        </div>
+                        <div class="form-group">
+                            <label >Skills</label>
+                            <input type="text" class="form-control skills"  name="jobDetails[skills]"
+                                value="{{#each this.skills}}{{this}},{{/each}}">
+                        </div>
+                        <div class="form-group">
+                            <label >Job Category</label>
+                            <input type="text" class="form-control jobCategory" name="jobDetails[jobCategory]" value="{{this.jobCategory}}">
+                            <div class="error-jobCategory"></div>
+
+                        </div>
+                        <div class="form-group">
+                            <label >Minimum Salary</label>
+                            <input type="text" class="form-control salaryMin"  name="jobDetails[salaryMin]" value="{{this.salaryMin}}">
+                            <div class="error-salaryMin"></div>
+
+                        </div>
+                        <div class="form-group">
+                            <label >Maximum Salary</label>
+                            <input type="text" class="form-control salaryMax"  name="jobDetails[salaryMax]" value="{{this.salaryMax}}">
+                            <div class="error-salaryMax"></div>
+
+                        </div>
+                        <div class="form-group">
+                            <label >Qualifications</label>
+                            <input type="text" class="form-control qualifications"  name="jobDetails[qualifications]" value="{{this.qualifications}}">
+                            <div class="error-qualifications"></div>
+
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-end p-2 px-3">
+                            <button class="btn btn-primary px-5"  type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            
+                            <button class="btn btn-primary px-5" type="submit">Save</button>
+                        </div>
+                    </form>
+                {{/each}}
+            </div>
+            <div class="modal-footer">
+                {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Modal to add job information --}}
+<div class="modal fade bd-example-modal-lg" id="jobAddModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Add Job Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/profile/addJob" method="POST">
+                    <div class="col-md-12 d-flex flex-column">
+                        <div class="col-md-12 d-flex justify-content-between mt-5 align-items-center">
+                            <div class="col-md-5 mx-3">
+                                <div class="d-flex flex-column" id="workInformation">
+                                    <div class="form-group">
+                                        <label >Job Title</label>
+                                        <input type="hidden" name="companyId"  value="{{company._id}}"/>
+                                        <input type="text" class="form-control"  name="jobTitle" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label >Job Location</label>
+                                        <input type="text" class="form-control"  name="jobLocation"
+                                            placeholder="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label >Job Category</label>
+                                        <input type="text" class="form-control" id="JobCategory" name="jobCategory"
+                                            placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label >Years of Experience</label>
+                                        <input type="number" class="form-control" id="yearsOfExperience" name="yearsOfExperience"
+                                            placeholder="">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >Salary Min</label>
+                                                <input type="text" class="form-control"  name="salaryMin"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >Salary Max</label>
+                                                <input type="text" class="form-control"  name="salaryMax"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 mx-3">
+                                <div class="form-group">
+                                    <label >Job Description</label>
+                                    <textarea class="form-control" rows="5" name="jobDescription"
+                                        placeholder=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label >Qualification</label>
+                                    <textarea class="form-control"  id="jobQualification" name="jobQualification"
+                                        placeholder=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label >Skills</label>
+                                    <input type="text" class="form-control" id="skills" name="skills" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-end p-2 px-3">
+                            <button class="btn btn-primary px-5"  type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            
+                            <button class="btn btn-primary px-5" type="submit">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/public/js/company.js"></script>
+<script>
+    (function($){
+
+        var jobForms = $('.jobForms')
+
+        jobForms.each( function(index, element){
+
+            var jobTitle = $(element).find('.jobTitle');
+            var jobLocation = $(element).find('.jobLocation')
+            var jobDescription = $(element).find('.jobDescription')
+            var yearsOfExperience = $(element).find('.yearsOfExperience')
+            var salaryMin = $(element).find('.salaryMin')
+            var salaryMax = $(element).find('.salaryMax')
+            var qualifications = $(element).find('.qualifications')
+            var skills = $(element).find('.skills')
+            var jobCategory = $(element).find('.jobCategory')
+            
+            $(element).submit( function(event){
+            
+                console.log('submitted')
+                
+                if(jobTitle.val().trim().length == 0 ){
+                    event.preventDefault();
+                    $(element).find(".error-jobTitle").empty();
+                    $(element).find(".error-jobTitle").append('<p class="error"> Error: Please enter jobtitle </p>')
+                    $(element).find(".jobTitle").focus()
+                    return
+                }
+
+                if(jobLocation.val().trim().length == 0 ){
+                    event.preventDefault();
+                    $(element).find(".error-jobLocation").empty();
+                    $(element).find(".error-jobLocation").append('<p class="error"> Error: Please enter jobLocation </p>')
+                    $(element).find(".jobLocation").focus()
+                    return
+                }
+                if(jobDescription.val().trim().length == 0 ){
+                    event.preventDefault();
+                    $(element).find(".error-jobDescription").empty();
+                    $(element).find(".error-jobDescription").append('<p class="error"> Error: Please enter jobDescription </p>')
+                    $(element).find(".jobDescription").focus()
+                    return
+                }
+
+                if( !$.isNumeric(yearsOfExperience.val()) || yearsOfExperience.val() < 0 ){
+                    event.preventDefault();
+                    $(element).find(".error-yearsOfExperience").empty();
+                    $(element).find(".error-yearsOfExperience").append('<p class="error"> Error: Please enter yearsOfExperience </p>')
+                    $(element).find(".yearsOfExperience").focus()
+                    return
+                }
+
+                if(skills.val().trim().length == 0 ){
+                    event.preventDefault();
+                    $(element).find(".error-skills").empty();
+                    $(element).find(".error-skills").append('<p class="error"> Error: Please enter skills </p>')
+                    $(element).find(".skills").focus()
+                    return
+                }
+
+                if(jobCategory.val().trim().length == 0 ){
+                    event.preventDefault();
+                    $(element).find(".error-jobCategory").empty();
+                    $(element).find(".error-jobCategory").append('<p class="error"> Error: Please enter jobCategory </p>')
+                    $(element).find(".jobCategory").focus()
+                    return
+                }
+
+                if( !$.isNumeric(salaryMin.val()) || salaryMin.val() < 0 ){
+                    event.preventDefault();
+                    $(element).find(".error-salaryMin").empty();
+                    $(element).find(".error-salaryMin").append('<p class="error"> Error: Please enter salaryMin </p>')
+                    $(element).find(".salaryMin").focus()
+                    return
+                }
+                if( !$.isNumeric(salaryMax.val()) || salaryMax.val() < 0 ){
+                    event.preventDefault();
+                    $(element).find(".error-salaryMax").empty();
+                    $(element).find(".error-salaryMax").append('<p class="error"> Error: Please enter salaryMax </p>')
+                    $(element).find(".salaryMax").focus()
+                    return
+                }
+
+                 if(qualifications.val().trim().length == 0 ){
+                    event.preventDefault();
+                    $(element).find(".error-qualifications").empty();
+                    $(element).find(".error-qualifications").append('<p class="error"> Error: Please enter qualifications </p>')
+                    $(element).find(".qualifications").focus()
+                    return
+                }
+
+
+
+            } )
+        } )
+        
+    })(window.jQuery)
+
+    function addMoreJobs() {
+       let wrapper = $('#jobs-wrapper');
+        let html = `<h2>{{this.description}}</h2>
+                        <input type="hidden" name="jobDetails[companyId]"  value="{{../company._id}}"/>
+                        <input type="hidden" name="jobDetails[id]"  value="{{this._id}}"/>
+                        <div class="form-group">
+                            <label >Job Title</label>
+                            <input type="text" class="form-control" name="jobDetails[jobTitle]" value="{{this.jobTitle}}">
+                        </div>
+                        <div class="form-group">
+                            <label >Location</label>
+                            <input type="text" class="form-control"  name="jobDetails[jobLocation]" value="{{this.jobLocation}}">
+                        </div>
+                        <div class="form-group">
+                            <label >Description</label>
+                            <input type="text" class="form-control" name="jobDetails[jobDescription]" value="{{this.jobDescription}}">
+                        </div>
+                        <div class="form-group">
+                            <label >Years of Experience</label>
+                            <input type="number" class="form-control" name="jobDetails[yearsOfExperience]" value={{this.yearsOfExperience}}>
+                        </div>
+                        <div class="form-group">
+                            <label >Skills</label>
+                            <input type="text" class="form-control"  name="jobDetails[skills]"
+                                value="{{#each this.skills}}{{this}},{{/each}}">
+                        </div>
+                        <div class="form-group">
+                            <label >Job Category</label>
+                            <input type="text" class="form-control"  name="jobDetails[jobCategory]" value="{{this.jobCategory}}">
+                        </div>
+                        <div class="form-group">
+                            <label >Minimum Salary</label>
+                            <input type="text" class="form-control"  name="jobDetails[salaryMin]" value="{{this.salaryMin}}">
+                        </div>
+                        <div class="form-group">
+                            <label >Maximum Salary</label>
+                            <input type="text" class="form-control"  name="jobDetails[salaryMax]" value="{{this.salaryMax}}">
+                        </div>
+                        <div class="form-group">
+                            <label >Qualifications</label>
+                            <input type="text" class="form-control"  name="jobDetails[qualifications]" value="{{this.qualifications}}">
+                        </div>`;
+        wrapper.append(html);
+    }
+    $(document).on("click", ".clone .remove-Work", function (e) {
+        $(e.target).parent().parent().remove();
+    });
+</script>

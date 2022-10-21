@@ -1,0 +1,24 @@
+<div id="navigationUnauthPartial">
+    {{#if notLoginPage}}
+        <div id="signIn">
+            <img src="/public/Stemconnect.png" style="max-height: 10vh;" alt="">
+            <p>A Modern Employment Solution</p>
+            <div class="auction-login">
+            <a class ="btn btn-success"  id="loginButton" href="/login" >Login</a>
+            <a class ="btn btn-success"  id="signUpButton"  href="/signup">Sign Up</a>
+                </div>
+        </div>
+    {{else}}
+    <img src="/public/Stemconnect-Title.png" style="max-height: 5vh;" alt="">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"  aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    {{/if}}
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav" id="navv-bar">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/search">Find a User or Company</a></li>
+            <li class="nav-item"><a class="nav-link" href="/aboutUs">About Us</a></li>
+        </ul>
+    </div>
+</div>

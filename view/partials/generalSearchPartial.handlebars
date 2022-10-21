@@ -1,0 +1,27 @@
+<form action="/search/general" method="POST" id="landingSearch">
+    <div class="searchContainer" >
+
+        <!--<input type="checkbox" class="form-check-input" value="{{userType}}" name="userTypeToggle" id="userTypeToggle"/>-->
+    <div id="toggleContainer">
+        <div class="toggleHold">
+            <label class="switch" for="userTypeToggle">
+                <input type="checkbox" class="checkbox" value="Company" name="userTypeToggle" id="userTypeToggle"/>
+                <span class="slider round"></span></label>
+            <input type="hidden" value="User" id="hiddenInput" name="userTypeToggle"/>
+        </div>
+        
+    
+    <label for="homeSearchBar">Find a <span id="getUserType">User</span></label>
+        </div>
+    <div id="searchInput">
+    <input type="text" value="{{partialName}}" name="homeSearchBar" id="homeSearchBar" placeholder="Find our many users and companies"/>
+        <div id="homeSearchBarErrorState"></div>
+    </div>
+   <div id="searchSubmit">
+        <button type="submit">Search</button>
+       </div>
+    
+    </div>
+    
+</form>
+<script src="/public/js/generalSearch.js"></script>

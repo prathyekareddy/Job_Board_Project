@@ -1,0 +1,194 @@
+<form action="/user/createNewUser" method="post" enctype="multipart/form-data" class="employee-creation-form" id='employee-creation-form'>
+    <div class="row m-5">
+        <div class="col-md-12">
+            <div class="row d-flex justify-content-between align-items-start">
+                <div class="col-md-5 mx-3">
+                    <div class="d-flex align-items-center flex-column">
+                        <div id="file"
+                            class="d-flex justify-content-start align-items-center flex-column form-group col-md-6">
+                            <h2 class="text-center py-2">Profile image</h2>
+                            <input type='file' class="form-control-file " id="profilePicture" name="profilePicture" required />
+                        </div>
+                    </div>
+                     <div class="error-profilePicture error" id="error-profilePicture"></div>
+                    <div class="form-group">
+                        <label >User Name</label>
+                        <input type="text" class="form-control" id="username" name="username"  value="{{employee.username}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label >Mail</label>
+                        <input type="text" class="form-control" id="email" name="email"  value="{{employee.email}}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label >Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="" value="{{employee.password}}" >
+                    </div>
+                    <div class="error-password" id="error-password"></div>
+                    <div class="form-group">
+                        <label >Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="" value="{{employee.confirmPassword}}">
+                    </div>
+                    <div class="error-confirmPassword" id="error-confirmPassword"></div>
+                </div>
+                <div class="col-md-5 mx-3">
+                    <div class="d-flex px-4 flex-column" >
+                        <h4 class="text-left py-4">Personal Information</h4>
+                        <div class="d-flex justify-content-between">
+                            <div class="form-group">
+                                <label >First Name</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" >
+                            </div>
+                            <div class="form-group ml-3">
+                                <label >Last Name</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" >
+                            </div>
+                        </div>
+                        <div class="error-firstName error" id="error-firstName"></div>
+                        <div class="form-group">
+                            <label >Phone Number</label>
+                            <input type="number" class="form-control" id="phoneNumber" name="phoneNumber"
+                                placeholder="" >
+                            <div class="error-phoneNumber error" id="error-phoneNumber"></div>
+                        </div>
+                        <div class="d-flex">
+                                <div class="dropdown form-group d-flex flex-column">
+                                                <label for="gender">Gender</label>
+                                                <select style="width: 200px;" class="text-right btn btn-secondary dropdown-toggle"
+                                                     id="gender" name="gender"
+                                                    data-toggle="dropdown" required>
+                                                    <option disabled selected value> -- select an option -- </option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="other">Other</option>
+                                                    <option value="prefernottosay">Prefer not to say</option>
+                                                </select>
+                                </div>
+                            <div class="fd-flex flex-column ml-3">
+                                <label >Date of Birth</label>
+                                <input type='date' id="dob" name="dob" class="form-control btn btn-outline-primary"
+                                    />
+                            </div>
+                        </div>
+                        <div class="error-gender error" id="error-gender"></div>
+
+                        <div class="form-group">
+                            <label >Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="" >
+                            <div class="error-address error" id="error-address"></div>
+                        </div>
+                        <div class="form-group">
+                            <label >About Me</label>
+                            <textarea class="form-control" rows="5" id="aboutMe" name="aboutMe"
+                                placeholder="" ></textarea>
+                                <div class="error-aboutMe error" id="error-aboutMe"></div>
+                        </div>
+                        <div class="d-flex flex-column" id="workInformation">
+                            <h4 class="text-left py-1" >Upload Resume</h4>
+                            <div>
+                                <input type='file' class="form-control-file"  name="uploadResume" id="uploadResume" accept=".pdf" required>
+                            </div>
+                            <div class="error-uploadResume error" id="error-uploadResume"></div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label >Website URL</label>
+                            <input type="url" class="form-control" id="websiteUrl" name="websiteUrl" placeholder="" >
+                        </div>
+
+                        <div class="error-websiteUrl error" id="error-websiteUrl"></div>
+
+
+                    </div>
+                </div>
+            </div>
+            {{!-- Profile End --}}
+        <div class="row d-flex justify-content-between align-items-start">
+            <div class="col-md-5">
+                <div class="d-flex flex-column" >
+                    <div class="d-flex flex-row">
+                        <h4 class="text-left py-4" >Resume Information</h4>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="resumeActive">
+                        </div>
+                    </div>
+                    <div id="education-wrapper" class=" d-flex flex-column">
+                        <div class="d-flex  py-2">
+                            <button class="btn btn-primary" onclick="addMoreEducation()" id="addEducation" type="button" value="getiValue()">Add Education Information</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label >Skills</label>
+                        <input type="text" class="form-control" id="skillsLookUp"  name="resume[skills]" placeholder="" >
+                    </div>
+                    <div id="skillsList">
+                                <h4 id="skillsHeading"></h4>
+                                <ul id="insertedSkills"></ul>
+                    </div>
+                    <div class="error-skills error" id="error-skills"></div>
+                    <div class="dropdown form-group d-flex flex-column">
+                                <label >Work Status</label>
+                                <select style="width: 200px;" class="text-right btn btn-secondary dropdown-toggle"
+                                     id="workStatus" name="resume[workStatus]" data-toggle="dropdown" required >
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="Employed">Employed</option>
+                                    <option value="Unemployed">Unemployed</option>
+                                </select>
+                    </div>
+                    <div class="form-group">
+                        <label >Years of Experience</label>
+                        <input type="number" step="0.01" class="form-control" id="yearsOfExperience" name="resume[year]"
+                            placeholder="" >
+                    </div>
+                   <div class="error-yearsOfExperience error" id="error-yearsOfExperience"></div>
+                <div id="project-wrapper" class=" d-flex flex-column">
+                <div class="d-flex py-2">
+                    <button class="btn btn-primary" onclick="addMoreProject()" type="button">Add Project Information</button>
+                </div>
+                </div>
+        </div>
+        </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+        <br/>
+            <hr>
+            <br/>
+        </div>
+            <div class="col-md-12">
+            <div class="d-flex  flex-column">
+            <div class="">
+            
+                <div class="d-flex flex-column" >
+                    
+                        <h4 class="text-left py-4" >Work Information</h4>
+                        
+                    
+                        <div id="work-information-wrapper" class="d-flex flex-column">
+                        <div class="d-flex py-2">
+                        <div class="d-flex py-2">
+                            <button class="btn btn-primary" onclick="addMoreWorkInformation()" type="button">Add Work Information</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+            </div>
+          <div class="col-md-12">
+        <br/>
+            <hr>
+            <br/>
+        </div>
+        <div class="col-md-12 d-flex justify-content-center p-2 px-3">
+        <a href="/logout" class="btn btn-primary px-5 mx-3"> Cancel </a>
+        <button class="btn btn-primary px-5" type="submit">Save</button>
+    </div>
+    </div>
+</form>
+
+
+
+
+<script src='/public/js/employeeCreation.js'></script>
+<script src='/public/js/employeeFormValidation.js'></script>

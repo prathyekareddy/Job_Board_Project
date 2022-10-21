@@ -1,0 +1,179 @@
+body {
+  background-color: rgb(236, 238, 239);
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+img {
+  max-width: 100%;
+}
+input[type='file'] {
+  display: inline-block;
+}
+#file {
+  text-align: center;
+}
+label {
+  font-weight: 200;
+}
+button {
+  background-color: rgb(60, 120, 207);
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+.bg-white {
+  background-color: #ffffff;
+  padding: 30px;
+}
+
+.profile-card .box {
+  background-color: #ffffff;
+  padding: 30px;
+}
+.image-box {
+  text-align: center;
+}
+.image-box img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  object-position: center;
+}
+.jobTitle {
+  font-size: 24px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+.complanyName {
+  font-size: 14px;
+  opacity: 0.65;
+  margin: 0;
+}
+.salaryRange {
+  margin-top: 15px;
+  color: rgb(205, 102, 95);
+}
+.address {
+  margin-top: 15px;
+}
+.map-pin {
+  width: 25px;
+}
+.description {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  opacity: 0.75;
+}
+.tag {
+  border: 1px solid rgb(168, 213, 232);
+  color: rgb(168, 213, 232);
+  border-radius: 30px;
+  padding: 5px 10px;
+  font-size: 10px;
+}
+.upper,
+.lower {
+  opacity: 0;
+  visibility: hidden;
+}
+.search {
+  display: block;
+  background: rgb(116, 182, 102);
+  width: 100%;
+}
+.profile-card .box {
+  background-color: #ffffff;
+  padding: 30px;
+}
+.image-box {
+  text-align: center;
+}
+.image-box img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  object-position: center;
+}
+.jobTitle {
+  font-size: 24px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+.companyName {
+  font-size: 14px;
+  opacity: 0.65;
+  margin: 0;
+}
+.salaryRange {
+  margin-top: 15px;
+  color: rgb(205, 102, 95);
+}
+.address {
+  margin-top: 15px;
+}
+.map-pin {
+  width: 25px;
+}
+.description {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  opacity: 0.75;
+}
+.tag {
+  border: 1px solid rgb(168, 213, 232);
+  color: rgb(168, 213, 232);
+  border-radius: 30px;
+  padding: 5px 10px;
+  font-size: 10px;
+}
+.upper,
+.lower {
+  opacity: 0;
+  visibility: hidden;
+}
+.search {
+  display: block;
+  background: rgb(116, 182, 102);
+  width: 100%;
+}
+
+input#homeSearchBar {
+  width: 75%;
+  height: 40px;
+  text-align: center;
+}
+
+div#filteredSearch {
+  display: none;
+}
+
+p {
+  color: red;
+}
+
+v.job-info li {
+  list-style: none;
+  background-image: none;
+  background-repeat: none;
+  background-position: 0;
+}
+
+div.job-info li {
+    list-style:none;
+    background-image:none;
+    background-repeat:none;
+    background-position:0; 
+}
+
+ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+li {
+  background-repeat: no-repeat;
+  background-position: 0px 5px;
+  padding-left: 14px;
+}

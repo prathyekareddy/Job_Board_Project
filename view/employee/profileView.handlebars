@@ -1,0 +1,233 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-center">
+        {{#if auth}}
+        {{> navigationAuthPartial }}
+        {{else}}
+        {{> navigationUnauthPartial }}
+        {{/if}}
+</nav>
+
+<div class="container" id="profileView" style="font-family: Arial, Helvetica, sans-serif; margin-top: 30px;">
+    <div class="row">
+        <div class="col-4">
+                <div class="card Larger shadow" style="width: 18rem;">
+                    {{!-- <button style="position: absolute; border-radius:40px;">Edit Image</button> --}} 
+                    <img class="card-img-top" src="/public/uploads/employeeFiles/profilePictures/{{lowercaseUsername}}_profilePicture.jpeg" onerror="this.onerror=null;this.src='https://png.pngtree.com/element_our/20200609/ourmid/pngtree-children-s-software-programming-image_2230761.jpg';" alt="User has no profile picture">
+                    <div class="card-body ">
+                        <h2 class="card-title d-flex justify-content-center" style="font-weight: bolder;">{{user.name.firstName}}</h2>
+                        <a href="mailto:{{user.email}}"><h5 class="card-title d-flex justify-content-center" style="color: rgb(155, 155, 155); font-size: medium;">{{user.email}}</h5></a>
+                        
+                        <h5 class="card-title d-flex justify-content-center" style="color: rgb(155, 155, 155); font-size:medium">{{user.address}}</h5>
+                        <a target="_blank" href="https://{{user.websiteUrl}}"><h5 class="card-title d-flex justify-content-center" style="  color: rgb(0, 132, 255); font-family: helvetica;  text-decoration: none; text-transform: uppercase;">Visit Website</h5></a>
+                        <p class="card-text d-flex justify-content-center">{{user.aboutMe}}</p>
+                    </div>
+            </div>
+            <br>
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#uploadResume">View Resume</button>
+                    <a href="mailto:{{user.email}}?subject= Found you on STEMconnect &body=Hello {{user.name.fullName}}," class="btn btn-success">Contact User</a>
+                    
+
+        </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Personal Information</h2>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                </div> 
+                <div class="card mb-3">
+                    <div class="card-body Larger shadow">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Full Name</h6> 
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                            {{user.name.fullName}}
+                            </div>
+                        </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                        {{user.email}}
+                        </div>
+                    </div>
+                    <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <h6 class="mb-0">Phone</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                            {{user.phoneNumber}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <h6 class="mb-0">Date Of Birth</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                            {{user.dob}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{#each user.resume}}
+                    {{#if this.resumeActive}}
+                        <div class="card mb-3">
+                            <div class="card-body Larger shadow">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <h2 style="font-weight: bolder; color:gray">Resume</h2>
+                                </div>
+                                <div class="col-md-4">
+                                    {{!-- <button type="button" class="btn btn-primary" data-id="this._id" data-toggle="modal" data-target="#resumeModal">Edit
+                                    </button> --}}
+
+                                </div>
+                                </div>
+                                <h5>{{this.description}}</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Year of Experience</h6>
+                                        <h6>{{this.yearsOfExperience}}</h6>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Skills</h6>
+                                        {{#each this.skills}}
+                                        <ul id="profileViewSkillsList">
+                                            <li>{{this}}</li>
+                                        </ul>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                                <br>
+
+                                {{#if this.education}}
+                                <h3>School</h3>
+                                {{#each this.education}}
+                                <h5 style="font-weight: bolder; color:gray">{{this.schoolName}}</h5>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">School Name</h6>
+                                        <h6>{{this.schoolName}}</h6>
+                                        <h6 style="font-weight: bolder;">Start Date</h6>
+                                        <h6>{{this.startDate}}</h6>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">GPA</h6>
+                                        <h6>{{this.gpa}}</h6>
+                                        <h6 style="font-weight: bolder;">End Date</h6>
+                                        <h6>{{this.endDate}}</h6>
+                                    </div>
+                                </div>
+                                <br>
+                                {{/each}}
+                                {{/if}}
+                                
+                                {{#if this.projects}}
+                                <h3>Projects</h3>
+                                {{#each this.projects}}
+                                <h5 style="font-weight: bolder; color:gray">{{this.projectTitle}}</h5>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Project Title</h6>
+                                        <h6>{{this.projectTitle}}</h6>
+                                        <h6 style="font-weight: bolder;">Start Date</h6>
+                                        <h6>{{this.startDate}}</h6>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Project Description</h6>
+                                        <h6>{{this.description}}</h6>
+                                        <h6 style="font-weight: bolder;">End Date</h6>
+                                        <h6>{{this.endDate}}</h6>
+                                    </div>
+                                </div>
+                                <br>
+                                {{/each}}
+                                {{/if}}
+                                {{#if ../user.workExperience}}
+                                <h3>Work Experience</h3>
+                                {{#each ../user.workExperience}}
+                                    {{!-- {{this.companyName}} --}}
+                                <h5 style="font-weight: bolder; color:gray">{{this.companyName}}</h5>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Job Title</h6>
+                                        <h6>{{this.jobTitle}}</h6>
+                                        <h6 style="font-weight: bolder;">Start Date</h6>
+                                        <h6>{{this.startDate}}</h6>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Job Description</h6>
+                                        <h6>{{this.jobDescription}}</h6>
+                                        <h6 style="font-weight: bolder;">End Date</h6>
+                                        <h6>{{this.endDate}}</h6>
+                                    </div>
+                                </div>
+                                <br>
+                                {{/each}}
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+    </div>
+</div>
+  <!-- Site footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2019 All Rights Reserved by STEMconnect
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-github"></i></a></li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>
+
+<!-- Modal View Resume -->
+<div class="modal fade bd-example-modal-lg" id="uploadResume" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Resume of {{user.username}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex justify-content-center">
+          {{!-- <iframe src="{{user.resumeUrl}}" frameborder="0"></iframe> --}}
+          <div class="container">
+
+            <div class="row d-flex justify-content-center">
+                    <object data="/public/uploads/employeeFiles/resume/{{lowercaseUsername}}_resume.pdf" type="application/pdf" style="height: 90vh; width:65vh ;">
+                        <embed src="/public/uploads/employeeFiles/resume/{{lowercaseUsername}}_resume.pdf" type="application/pdf" />
+                    </object>
+            </div>
+          </div>
+      </div>
+      {{!-- <div class="modal-footer">   
+      </div> --}}
+    </div>
+  </div>
+</div>

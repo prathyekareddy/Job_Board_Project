@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        {{#if auth}}
+        {{> navigationAuthPartial }}
+        {{else}}
+        {{> navigationUnauthPartial }}
+        {{/if}}
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card Larger shadow" style="width: 18rem;">
+                <div class="card-body">
+                    <img id="card-image-top" src="/public/uploads/companyFiles/profilePictures/{{company.lowercaseUsername}}_profilePicture.jpeg" alt="Card Image cap"/>
+                    <div class="card-body">
+                        <h2 class="card-title d-flex justify-content-center" >{{company.companyName}}</h2>
+                        <h4 class="card-title d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">Location: {{company.location}}</h4>
+                        <h4 class="card-title d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">Category: {{company.category}}</h4>
+                        <h5 class="card-subtitle d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">HR Contact Email: {{company.hrEmail}}</h5>
+                        <br>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-6 col-md-4">
+                    
+                </div>
+                <div id="jobs-wrapper" class="col-6 col-md-4">
+
+                </div>
+                <div class="container">
+                    <div class="card-deck">
+                        {{#each company.jobDetails}}
+                            {{#if this.jobStatus}}
+                            <div class="col-6   " style="padding-bottom: 50px;">
+                                    <div class="card Larger shadow">
+                                        <img style="border-radius: 50% ; padding: 30px 80px 20px 80px" class="card-img-top" src="/public/uploads/companyFiles/profilePictures/{{../company.lowercaseUsername}}_profilePicture.jpeg" onerror="this.onerror=null;this.src='https://png.pngtree.com/element_our/20200609/ourmid/pngtree-children-s-software-programming-image_2230761.jpg';" alt="Card Image cap"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-left">{{this.jobTitle}}</h5>
+                                            <h6 class="card-subtitle d-flex justify-content-left" style="font-weight: lighter; color: lightcoral">{{../company.companyName}}</h6>
+                                            <h5 class="card-title d-flex justify-content-left" style="font-size: medium;">${{this.salaryMin}} - ${{this.salaryMax}} </h5>
+                                            <p class="card-subtitle text-muted d-flex justify-content-left" style="font-size: medium;">{{this.jobLocation}}</p>
+                                            <p class="card-text d-flex justify-content-left">{{this.jobDescription}}</p>
+                                            {{#each this.skills}}
+                                                <span class="badge badge-pill badge-info" style="font-size: small;" >{{this}}</span>
+                                            {{/each}}
+                                            <form action="/profile/deleteJob" method="post">
+                                                <input type="hidden" name="jobid"  value="{{this._id}}"/>
+                                                <input type="hidden" name="companyid"  value="{{../company._id}}"/>
+                                                
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/if}}
+                        {{/each}}
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+  <!-- Site footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2019 All Rights Reserved by STEMconnect
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-github"></i></a></li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>

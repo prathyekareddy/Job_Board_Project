@@ -1,0 +1,18 @@
+<li>
+    <div class="container">
+    <div class="row">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <img id="card-image-top" src="/public/uploads/companyFiles/profilePictures/{{lowercaseUsername}}_profilePicture.jpeg" onerror="this.onerror=null;this.src='https://png.pngtree.com/element_our/20200609/ourmid/pngtree-children-s-software-programming-image_2230761.jpg';" alt="Card Image cap"/>
+                    <div class="card-body">
+                        <h2 class="card-title d-flex justify-content-center">Company: {{companyName}}</h2>
+                        <h4 class="card-title d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">Location: {{location}}</h4>
+                        <h4 class="card-title d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">Category: {{category}}</h4>
+                        <h5 class="card-subtitle d-flex justify-content-left" style="color: rgb(116, 116, 116); font-size: medium;">HR Contact Email: {{hrEmail}}</h5>
+                        <button style="min-width: 218px; min-height: 65px; font-size:16px; margin-top: 10px;" onclick="document.location.href='/profile/company/{{_id}}'">View Profile of {{companyName}}</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+</li>

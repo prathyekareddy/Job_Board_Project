@@ -1,0 +1,471 @@
+<form action="/company/createNewCompany" class="company-creation-form" id="company-creation-form" method="post" enctype="multipart/form-data">
+    <div class="row m-5">
+        <div class="col-md-12 mx-3">
+            <div class="d-flex align-items-center flex-column">
+                <div id="file"
+                    class="d-flex justify-content-start align-items-center flex-column form-group col-md-6">
+                    <h2 class="text-center py-2">Profile image</h2>
+                    <br />
+                    <br /> 
+                    {{!-- btn btn-outline-primary my-3 filePond --}}
+                    <input type='file' class="form-control-file " id="profilePicture" name="profilePicture"/>
+                </div>
+                <div class="error-profilePicture error" id="error-profilePicture"></div>
+            </div>
+            <div class="col-md-12 d-flex justify-content-between align-items-start">
+                <div class="col-md-5 mx-3 my-4">
+                    <div class="form-group">
+
+                        <label >User Name</label>
+
+                        <input type="text" class="form-control" id="username" name="username" placeholder="" value="{{company.username}}" readonly>
+                    </div>
+                    <div class="error-username error" id="error-username"></div>
+                    <div class="form-group">
+
+                        <label >HR Email</label>
+
+                        <input type="email" class="form-control" id="hrEmail" name="hrEmail" placeholder="" value="{{company.email}}" readonly>
+                    </div>
+                    <div class="error-hrEmail error" id="error-hrEmail"></div>
+                    <div class="form-group">
+                        <label >Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="" value="{{company.password}}">
+                    </div>
+                    <div class="error-password error" id="error-password"></div>
+                    <div class="form-group">
+                        <label >Repeat Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" value="{{company.confirmPassword}}"
+                            placeholder="">
+                    </div>
+                    <div class="error-confirmPassword error" id="error-confirmPassword"></div>
+                </div>
+                <div class="col-md-5 mx-3">
+                    <div class="d-flex flex-column" >
+                        <h4 class="text-left pb-4 mt-0" >Company Information</h4>
+                        <div class="d-flex justify-content-between">
+                            <div class="form-group">
+                                <label >Company Name</label>
+                                <input type="text" class="form-control" id="companyName" name="companyName"
+                                    placeholder="">
+                            </div>
+                        </div>
+                        <div class="error-companyName error" id="error-companyName"></div>
+                        <div class="form-group">
+                            <label >Phone Number</label>
+                            <input type="number" class="form-control" id="phoneNumber" name="phoneNumber"
+                                placeholder="">
+                        </div>
+                        <div class="error-phoneNumber error" id="error-phoneNumber"></div>
+                        <div class="form-group">
+                            <label >Category</label>
+                            <input type="text" class="form-control" id="category" name="category" placeholder="">
+                        </div>
+                        <div class="error-category error" id="error-category"></div>
+                        <div class="form-group">
+                            <label >Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="">
+                        </div>
+                        <div class="error-address error" id="error-address"></div>
+                    </div>
+                </div>
+            </div>
+
+                <div id="job-wrapper" class="col-md-12 d-flex flex-column">
+                    
+                    <div class="col-md-12 d-flex justify-content-between mt-5 align-items-center">
+                        <div class="col-md-5 mx-3">
+                            <div class="d-flex flex-column" >
+                                <div class="form-group">
+                                    <label >Job Title</label>
+                                    <input type="text" class="form-control 10000" id="jobTitle10000" name="jobTitle" placeholder="">
+                                </div>
+                                <div class="error-jobTitle10000 error" id="error-jobTitle10000"></div>
+                                <div class="form-group">
+                                    <label >Job Location</label>
+                                    <input type="text" class="form-control 10000" id="jobLocation10000" name="jobLocation"
+                                        placeholder="">
+                                </div>
+                                <div class="error-jobLocation10000 error" id="error-jobLocation10000"></div>
+                                    <div class="form-group">
+                                        <label for="categoryLookUp">Job Category</label>
+                                        <input class="form-control 10000" id="jobCategory10000" name="jobCategory" type="text" placeholder=""/>
+                                    </div>
+                                    <div class="error-jobCategory10000 error" id="error-jobCategory10000"></div>
+                            
+
+                                <div class="form-group">
+                                    <label >Years of Experience</label>
+                                    <input type="number" class="form-control 10000" id="yearsOfExperience10000" name="yearsOfExperience"
+                                        placeholder="">
+                                </div>
+                                <div class="error-yearsOfExperience10000 error" id="error-yearsOfExperience10000"></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label >Salary Min</label>
+                                            <input type="text" class="form-control 10000" id="salaryMin10000" name="salaryMin"
+                                                placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label >Salary Max</label>
+                                            <input type="text" class="form-control 10000" id="salaryMax10000" name="salaryMax"
+                                                placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="error-salary10000 error" id="error-salary10000"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 mx-3">
+                            <div class="form-group">
+                                <label >Job Description</label>
+                                <textarea class="form-control 10000" rows="5" id="jobDescription10000" name="jobDescription"
+                                    placeholder=""></textarea>
+                            </div>
+                            <div class="error-jobDescription10000 error" id="error-jobDescription10000"></div>
+                            <div class="form-group">
+                                <label >Qualification</label>
+                                <textarea class="form-control 10000"  id="jobQualification10000" name="jobQualification"
+                                    placeholder=""></textarea>
+                            </div>
+                            <div class="error-jobQualification10000 error" id="error-jobQualification10000"></div>
+                            <div class="form-group">
+                                <label >Skills</label>
+                                <input  class="form-control 10000" id="skillsLookUp10000" name="skillsLookup" type="text" placeholder="Skills"/>
+                            </div>
+                            <div class="error-skillsLookUp10000 error" id="error-skillsLookUp10000"></div>
+                            <div id="skillsList10000">
+                                <h4 id="skillsHeading"></h4>
+                                <ul id="insertedSkills"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mx-5">
+                        <button class="btn btn-primary" onclick="addMoreDetails()" type="button">Add More</button>
+                    </div>
+                </div>
+                
+        </div>
+        <div class="col-md-12 d-flex justify-content-end p-2 px-3">
+            <a class="btn btn-primary px-5"  href ="/signUp">Cancel</a>
+
+            <button class="btn btn-primary px-5" type="submit">Save</button>
+        </div>
+    </div>
+</form>
+
+<script src='/public/js/employeeCreation.js'></script>
+<script src='/public/js/employeeFormValidation.js'></script>
+<script>
+
+    /*
+    We want to preview images, so we need to register the Image Preview plugin
+    */
+    FilePond.registerPlugin(
+        // encodes the file as base64 data
+        FilePondPluginFileEncode,
+
+        // validates the size of the file
+        FilePondPluginFileValidateSize,
+
+        // corrects mobile image orientation
+        FilePondPluginImageExifOrientation,
+
+        // previews dropped images
+        FilePondPluginImagePreview
+    );
+
+    // Select the file input and use create() to turn it into a pond
+    let data = document.getElementsByClassName("filePond");
+
+    for (let i = 0; i <= data.length - 1; i++) FilePond.create(data[i]);
+</script>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(document).on("click", ".clone .remove-Work", function (e) {
+        $(e.target).parent().parent().remove();
+    });
+
+    function addMoreDetails() {
+        let wrapper = $('#job-wrapper');
+        let html = `<div class="col-md-12 d-flex justify-content-between mt-5 align-items-center clone">
+                    <div class="col-md-5 mx-3">
+                        <span class="remove-Work">remove</span>
+                        <div class="d-flex flex-column" id="workInformation">
+                            <div class="form-group">
+                                <label for="JobTitle">Job Title</label>
+                                <input type="text" class="form-control" id="JobTitle" name="jobTitle" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="JobLocation">Job Location</label>
+                                <input type="text" class="form-control" id="JobLocation" name="jobLocation"
+                                    placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="JobCategory">Job Category</label>
+                                <input type="text" class="form-control" id="JobCategory" name="jobCategory"
+                                    placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="yearsOfExperience">Years of Experience</label>
+                                <input type="number" class="form-control" id="yearsOfExperience" name="yearsOfExperience"
+                                    placeholder="">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="SalaryMin">Salary Min</label>
+                                        <input type="text" class="form-control" id="salaryMin" name="salaryMin"
+                                            placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="SalaryMax">Salary Max</label>
+                                        <input type="text" class="form-control" id="salaryMax" name="salaryMax"
+                                            placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 mx-3">
+                        <div class="form-group">
+                            <label for="jobDescription">Job Description</label>
+                            <textarea class="form-control" rows="5" id="jobDescription" name="jobDescription"
+                                placeholder=""></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobQualification">Qualification</label>
+                            <textarea class="form-control"  id="jobQualification" name="jobQualification"
+                                placeholder=""></textarea>
+                        </div>
+                        <div class="form-group">
+                        <label for="skills">Skills</label>
+                        <input type="skills" class="form-control" id="skills" name="skills" placeholder="" >
+                    </div>
+                    </div>
+                </div>`;
+        wrapper.append(html);
+    }
+    
+ (function($) {
+    var yearsExpSlider = $('#yearsExpSlider');
+    var yearsExpInput = $('#yearsExpInput');
+    var minSalarySlider = $('#minSalarySlider');
+    var minSalaryInput = $('#minSalaryInput');
+    var projectNumberSlider = $('#projectNumberSlider');
+    var projectNumberInput = $('#projectNumberInput');
+    
+    var categoryInput = $('#categoryLookUp');
+
+    var skillsInput = $('#skillsLookUp');
+    var skillsList = $('#skillsLookUp');
+    var selectedSkills = $('#insertedSkills');
+    var skillsDiv = $('#skillsList');
+    var form = $('#filteredSearchForm');
+    
+    var revealMinimumSalary = $('#revealMinSalary');
+    var removeMinimumSalary = $('#removeMinSalary');
+    var minSalaryFilter = $('#minimumSalaryFilter');
+
+    var revealProjectNumber = $('#revealProjectNumber');
+    var removeProjectNumber = $('#removeProjectNumber');
+    var projectNumberFilter = $('#projectNumberFilter');
+
+    var revealJobCategory = $('#revealCategory');
+    var removeJobCategory = $('#removeCategory');
+    var jobCategoryFilter = $('#categoryInputFilter')
+
+    var projectNumberBool = false;
+    var jobCategoryBool = false;
+    var minSalaryBool = false;
+
+
+    function linkSliderAndInput(slider, input){
+        slider.val(0);
+        input.val(slider.val());
+        slider.on("input", function(){
+            input.val($(this).val());
+        });
+        input.change(function(){
+            slider.val($(this).val()); 
+        });
+    }
+
+    function skillsAddition(){
+        var skills = getSkills();
+        skillsList.autocomplete({
+            source: skills,
+            minLength: 1,
+            select: function(event, ui){
+                if(selectedSkills.children().length == 0 ) $('#skillsHeading').html('Skills List');
+                skillsInput.val("");
+                $('#filteredSearchBarErrorState').empty();
+                selectedSkills.append("<li id='" + ui.item.value + "'>"
+                + ui.item.value + " <input type='hidden' name='skills[]' value='" + ui.item.value + "'/>"
+                //+ "<button onclick='document.getElementById(\"" + ui.item.value + "\".remove())>Remove</button>"
+                + "<button onclick='document.getElementById(\"" + ui.item.value + "\").remove()'>Remove</button>"
+                + "</li>");
+
+                return false;
+            }
+        });
+    }
+
+    function optionalFilterReveal(reveal, remove, filter, inputArray, bool){
+        for(input of inputArray){
+            input.prop("disabled", true);
+        }
+        filter.css("display","none");
+        reveal.click(function(){
+            filter.css("display", "block");
+            for(input of inputArray){
+                input.prop("disabled", false);
+            }
+            reveal.css("display", "none");
+            bool = true;
+        });
+
+        remove.click(function(){
+            filter.css("display", "none");
+            for(input of inputArray){
+                input.prop("disabled", true);
+            }
+            reveal.css("display", "block");
+            bool = false;
+        });
+    }
+
+
+
+    linkSliderAndInput(yearsExpSlider, yearsExpInput);
+    linkSliderAndInput(minSalarySlider, minSalaryInput);
+    linkSliderAndInput(projectNumberSlider, projectNumberInput);
+    skillsAddition();
+    optionalFilterReveal(revealMinimumSalary, removeMinimumSalary, minSalaryFilter, [minSalarySlider, minSalaryInput], minSalaryBool);
+    optionalFilterReveal(revealProjectNumber, removeProjectNumber, projectNumberFilter, [projectNumberSlider, projectNumberInput], projectNumberBool);
+    optionalFilterReveal(revealJobCategory, removeJobCategory, jobCategoryFilter, [categoryInput], jobCategoryBool);
+
+    if($('#searchResultsExists li').length > 0){
+        $('#searchResults').prepend("<h2>Results</h2>");
+    };
+
+    form.submit(function(e){
+        
+        if(selectedSkills.children().length == 0 && projectNumberBool && (minSalaryBool || jobCategoryBool)){
+            e.preventDefault();
+            console.log('test');
+            $('#filteredSearchBarErrorState').empty();
+            $('#filteredSearchBarErrorState').append('<p class="validationMessage"> Error: Need minimum of 1 additional filter to use the filtered search!</p>')
+        } else{
+            $('#homeSearchBarErrorState').empty();
+            if (yearsExpInput) yearsExpInput.prop('disabled', true);
+            if (minSalaryInput) minSalaryInput.prop('disabled', true);
+            skillsInput.prop('disabled', true);
+            if (projectNumberInput) projectNumberInput.prop('disabled', true);
+        
+        }
+    });
+    
+
+})(window.jQuery);
+
+function searchToggle(){
+    var general = $('#searchBar');
+    var filter = $('#filteredSearch');
+
+    var button = $('#filteredSearchReveal');
+    
+    if(filter.css("display") != 'none'){
+        filter.css("display", "none");
+        general.css("display", "block");
+        button.prop("value", "Use Filtered Search");
+    } else{
+        filter.css("display", "block");
+        general.css("display", "none");
+        button.prop("value", "Use General Search");
+    }
+};
+
+function getSkills(){
+    return [
+        "Mongodb",
+        "Nodejs",
+        "Express",
+        "React",
+        "Software Architecture",
+        "Front-End Development",
+        "Back-End Development",
+        "Full-Stack Development",
+        "C",
+        "C++",
+        "C#",
+        "Java",
+        "Javascript",
+        "Python",
+        "Database Management",
+        "SQL",
+        "MySQL",
+        "SQLite",
+        "CAD",
+        "Machine Shop",
+        "Cybersecurity Analysis",
+        "Data Analytics",
+        "Project Management",
+        "Scrum",
+        "Agile Development"       
+    ];
+};
+
+function getJobCategories(){
+    return [
+        "IT",
+        "Developer",
+        "Analyst",
+        "Manager",
+        "Project Manager",
+        "Designer",
+        "Engingeer",
+        "Software Architect",
+        "Technical Architect",
+        "Mechanical Engineer",
+        "Electrical Engineer",
+        "Biomedical Engineer",
+        "Computer Engineer",
+        "Security Analyst",
+        "Data Scientist",
+        "Civil Engineer",
+        "Front-End Developer",
+        "Back-End Developer",
+        "Full Stack Developer",
+        "Software Engineer"
+    ];
+};
+    
+$('#JobCategory').autocomplete({
+      source: getJobCategories(),//the soureceList
+      minLength: 1
+  })
+
+
+
+
+</script>
+

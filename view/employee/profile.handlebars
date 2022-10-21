@@ -1,0 +1,721 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-center">
+        {{#if auth}}
+        {{> navigationAuthPartial }}
+        {{else}}
+        {{> navigationUnauthPartial }}
+        {{/if}}
+</nav>
+<div class="container" id="profileView" style="font-family: Arial, Helvetica, sans-serif; margin-top: 30px;">
+    <div class="row">
+        <div class="col-4">
+                <div class="card Larger shadow" style="width: 18rem;">
+                    {{!-- <button style="position: absolute; border-radius:40px;">Edit Image</button> --}}
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#uploadPicture" style="position: absolute; border-radius:40px;">
+                    Edit Image
+                    </button>
+                    
+                    <img class="card-img-top" src="public/uploads/employeeFiles/profilePictures/{{lowercaseUsername}}_profilePicture.jpeg" alt="No Image Found" onerror=this.src="public/user.svg" style="position: static;">
+                    <div class="card-body ">
+                        <h2 class="card-title d-flex justify-content-center" style="font-weight: bolder;">{{user.name.firstName}}</h2>
+                        <a href="mailto:{{user.email}}"><h5 class="card-title d-flex justify-content-center" style="color: rgb(155, 155, 155); font-size: medium;">{{user.email}}</h5></a>
+                        
+                        <h5 class="card-title d-flex justify-content-center" style="color: rgb(155, 155, 155); font-size:medium">{{user.address}}</h5>
+                        <p class="card-text d-flex justify-content-center">{{user.aboutMe}}</p>
+                        <a target="_blank" href="{{user.websiteUrl}}"><h5 class="card-title d-flex justify-content-center" style="  color: rgb(0, 132, 255); font-family: helvetica;  text-decoration: none; text-transform: uppercase;">Visit Website</h5></a>
+                    </div>
+            </div>
+            <br>
+                    <a href="/logout" class="btn btn-outline-dark justify-content-center" role="button" aria-pressed="true">Click Here To
+                    Logout</a>
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#uploadResume">View Resume</button>
+        </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Personal Information</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#personalInfoModal">Edit Personal Information
+                        </button>
+                    </div>
+                </div> 
+                <div class="card mb-3 Larger shadow">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Full Name</h6> 
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                            {{user.name.fullName}}
+                            </div>
+                        </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                        {{user.email}}
+                        </div>
+                    </div>
+                    <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <h6 class="mb-0">Phone</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                            {{user.phoneNumber}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <h6 class="mb-0">Date Of Birth</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                            {{user.dob}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <h2 style="font-weight: bolder; color:gray">User Active Resume</h2>
+                <button type="button" class="btn btn-primary" data-id="this._id" data-toggle="modal" data-target="#resumeModal">Edit Resume
+                                    </button>
+                <button type="button" class="btn btn-primary" data-id="this._id" data-toggle="modal" data-target="#addResume">Add Resume
+                                    </button>
+                {{#each user.resume}}
+                    {{#if this.resumeActive}}
+                        <div class="card mb-3 Larger shadow">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <h2 style="font-weight: bolder; color:gray">Resume</h2>
+                                </div>
+                                <div class="col-md-4">
+                                    {{!-- <button type="button" class="btn btn-primary" data-id="this._id" data-toggle="modal" data-target="#resumeModal">Edit
+                                    </button> --}}
+                                    
+                                    <form action="/profile/deleteResume" method="post">
+                                        <input type="hidden" name="resumeid" id="{{this._id}}" value="{{this._id}}"/>
+                                        <input type="hidden" name="userid" id="{{../user._id}}" value="{{../user._id}}"/>
+                                        <button class="btn btn-danger" type="submit">Delete Resume</button>
+                                    </form>
+                                    
+                                </div>
+                                </div>
+                                <h5>{{this.description}}</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Year of Experience</h6>
+                                        <h6>{{this.yearsOfExperience}}</h6>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Skills</h6>
+                                        {{#each this.skills}}
+                                        <ul id="profileViewSkillsList">
+                                            <li>{{this}}</li>
+                                        </ul>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                                <br>
+
+                                {{#if this.education}}
+                                <h3>School</h3>
+                                {{#each this.education}}
+                                <h5 style="font-weight: bolder; color:gray">{{this.schoolName}}</h5>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">School Name</h6>
+                                        <h6>{{this.schoolName}}</h6>
+                                        <h6 style="font-weight: bolder;">Start Date</h6>
+                                        <h6>{{this.startDate}}</h6>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">GPA</h6>
+                                        <h6>{{this.gpa}}</h6>
+                                        <h6 style="font-weight: bolder;">End Date</h6>
+                                        <h6>{{this.endDate}}</h6>
+                                    </div>
+                                </div>
+                                <br>
+                                {{/each}}
+                                {{/if}}
+                                
+                                {{#if this.projects}}
+                                <h3>Projects</h3>
+                                {{#each this.projects}}
+                                <h5 style="font-weight: bolder; color:gray">{{this.projectTitle}}</h5>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Project Title</h6>
+                                        <h6>{{this.projectTitle}}</h6>
+                                        <h6 style="font-weight: bolder;">Start Date</h6>
+                                        <h6>{{this.startDate}}</h6>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Project Description</h6>
+                                        <h6>{{this.description}}</h6>
+                                        <h6 style="font-weight: bolder;">End Date</h6>
+                                        <h6>{{this.endDate}}</h6>
+                                    </div>
+                                </div>
+                                <br>
+                                {{/each}}
+                                {{/if}}
+                                {{#if ../user.workExperience}}
+                                <h3>Work Experience</h3>
+                                {{#each ../user.workExperience}}
+                                    {{!-- {{this.companyName}} --}}
+                                <h5 style="font-weight: bolder; color:gray">{{this.companyName}}</h5>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Job Title</h6>
+                                        <h6>{{this.jobTitle}}</h6>
+                                        <h6 style="font-weight: bolder;">Start Date</h6>
+                                        <h6>{{this.startDate}}</h6>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 style="font-weight: bolder;">Job Description</h6>
+                                        <h6>{{this.jobDescription}}</h6>
+                                        <h6 style="font-weight: bolder;">End Date</h6>
+                                        <h6>{{this.endDate}}</h6>
+                                    </div>
+                                </div>
+                                <br>
+                                {{/each}}
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+    </div>
+</div>
+
+<!-- Modal Update Personal Information-->
+<div class="modal fade" id="personalInfoModal" tabindex="-1" role="dialog" aria-labelledby="personalInfo" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Personal Information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/profile/editPersonalInfo" method="POST">
+                <input type="hidden" name="userid" id="{{user._id}}" value="{{user._id}}"/>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" value={{user.name.firstName}}>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" value={{user.name.lastName}}>
+                </div>
+                <div class="form-group">
+                    <label for="email">Mail</label>
+                    <input type="text" class="form-control" id="mail" name="email" aria-describedby="mailHelp"
+                        value={{user.email}}>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{user.phoneNumber}}">
+                </div>
+                <div class="fd-flex flex-column form-group">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type='date' id="dateOfBirth" name="dateOfBirth" class="form-control btn btn-outline-primary" value="{{user.dob}}"
+                        onchange="readURL(this);" />
+                </div>
+                <div class="dropdown form-group d-flex flex-column">
+                                <label for="gender">Gender</label>
+                                <select style="width: 200px;" class="text-right btn btn-secondary dropdown-toggle"
+                                    type="button" id="gender" name="dropdownMenuButton" value="{{user.gender}}"
+                                    data-toggle="dropdown">
+
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                     <option value="other">Other</option>
+                                    <option value="prefernottosay">Prefer not to say</option>
+                                </select>
+                </div>
+                <div class="form-group">
+                    <label for="aboutMe">About Me</label>
+                    <input type="text" class="form-control" id="aboutMe" name="aboutMe" value="{{user.aboutMe}}">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" value="{{user.address}}">
+                </div>
+                {{!-- <div class="form-group">
+                    <label for="resumeUrl">Resume URL</label>
+                    <input type='file' class="btn btn-outline-primary my-3" onchange="readURL(this);" id="resumeUrl" name="resumeUrl" />
+                </div> --}}
+                <div class="form-group">
+                    <label for="websiteUrl">Website URL</label>
+                    <input type="text" class="form-control" id="websiteUrl" name="websiteUrl" value = "{{user.websiteUrl}}">
+                </div>
+      </div>
+      <div class="modal-footer">
+        {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit Image -->
+<div class="modal fade" id="uploadPicture" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select New Profile Picture</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex justify-content-center">
+        <form action="/user/updatePicture" method="post" enctype="multipart/form-data">
+            <input type='file' class="form-control-file"  name="profilePicture" id="profilePicture" accept=".jpeg">
+            <button type="submit">Confirm Upload</button>
+        </form>
+      </div>
+      {{!-- <div class="modal-footer">   
+      </div> --}}
+    </div>
+  </div>
+</div>
+<!-- Modal View Resume -->
+<div class="modal fade bd-example-modal-lg" id="uploadResume" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Resume of {{user.username}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex justify-content-center">
+          {{!-- <iframe src="{{user.resumeUrl}}" frameborder="0"></iframe> --}}
+          <div class="container">
+            <div class="row d-flex justify-content-center">
+                <form action="/user/updateResumefile" method="post" enctype="multipart/form-data">
+                    <input type='file' class="form-control-file"  name="resumeUrl" id="resumeUrl" accept=".pdf">
+                    <button type="submit">Upload New</button>
+                </form>
+            </div>
+            <div class="row d-flex justify-content-center">
+                    <object data="public/uploads/employeeFiles/resume/{{lowercaseUsername}}_resume.pdf" type="application/pdf" style="height: 90vh; width:65vh ;">
+                        <embed src="public/uploads/employeeFiles/resume/{{lowercaseUsername}}_resume.pdf" type="application/pdf" />
+                    </object>
+            </div>
+          </div>
+      </div>
+      {{!-- <div class="modal-footer">   
+      </div> --}}
+    </div>
+  </div>
+</div>
+
+<!-- Modal Update Resume Information-->
+<div class="modal fade bd-example-modal-lg" id="resumeModal" tabindex="-1" role="dialog" aria-labelledby="personalInfo" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Resume Information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          {{#each user.resume}} 
+            </label>
+                <form action="/profile/editResume" method="POST">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Check box to set this Resume Active
+                            </div>
+                            <div class="col-md-2">
+                                <div class="bootstrap-switch-square">
+                                    <input type="checkbox" data-toggle="switch" name="resume[resumeActive]" id="Resend" value="true"  />
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+ 
+                    
+                    <h2>{{this.description}}</h2>
+                    <input type="hidden" name="resume[userid]" id="{{../user._id}}" value="{{../user._id}}"/>
+                    <input type="hidden" name="resume[id]" id="{{this._id}}" value="{{this._id}}"/>
+                    <div class="form-group">
+                        <label for="description">Title of Resume</label>
+                        <input type="text" class="form-control" id="description" name="resume[description]" value="{{this.description}}" maxlength="20">
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year of Experience</label>
+                        <input type="number" class="form-control" id="year" name="resume[year]" value={{this.yearsOfExperience}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="mail">Skills</label>
+                        <input type="text" class="form-control" id="mail" name="resume[skills]" aria-describedby="mailHelp"
+                            value="{{#each this.skills}}{{this}},{{/each}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="workStatus">Work Status</label>
+                        <input type="text" class="form-control" id="workStatus" name="resume[workStatus]" value="{{this.workStatus}}">
+                    </div>
+
+                    <br>
+                    {{#if this.projects}}
+                    <h3>Projects</h3>
+                    {{#each this.projects}}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{!-- {{#if this.projects}} --}}
+                                    <input type="hidden" name="resume[project][id]" id="{{this._id}}" value="{{this._id}}"/>
+                                    <div class="form-group">
+                                        <label for="projectTitle">Project Title</label>
+                                        <input type="text" class="form-control" id="projectTitle" name="resume[project][projectTitle]" value="{{this.projectTitle}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Year of Experience</label>
+                                        <input type="text" class="form-control" id="description" name="resume[project][description]" value="{{this.description}}" >
+                                    </div>
+                                {{!-- {{/if}} --}}
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                        {{!-- <label for="startDate">Start Date</label>
+                                        <input type="text" class="form-control" id="endDate" name="resume[project][startDate]" value="{{this.startDate}}"> --}}
+                                        <div class="fd-flex flex-column ml-3">
+                                            <label for="startDate">Start Date</label>
+                                            <input type='date' id="startDate" name="resume[project][startDate]" class="form-control btn btn-outline-primary" value="{{this.startDate}}"
+                                                onchange="readURL(this);" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {{!-- <label for="endDate">End Date</label>
+                                        <input type="text" class="form-control" id="endDate" name="resume[project][endDate]" value="{{this.endDate}}" > --}}
+                                        <div class="fd-flex flex-column ml-3">
+                                            <label for="endDate">End Date</label>
+                                            <input type='date' id="endDate" name="resume[project][endDate]" class="form-control btn btn-outline-primary" value="{{this.endDate}}"
+                                                onchange="readURL(this);" />
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                    {{/if}}
+                    <br>
+                    <br>
+                    {{#if this.education}}
+                    <h3>Education</h3>
+                    {{#each this.education}}
+                        <div class="row">
+                            <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="schoolName">School Name</label>
+                                        <input type="text" class="form-control" id="schoolName" name="resume[School][schoolName]" value="{{this.schoolName}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gpa">G.P.A</label>
+                                        <input type="number" step="0.01" min="0.00" max="4.00" class="form-control" id="gpa" name="resume[School][gpa]" value="{{this.gpa}}" >
+                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                        <div class="fd-flex flex-column ml-3">
+                                            <label for="startDate">Start Date</label>
+                                            <input type='date' id="startDate" name="resume[School][startDate]" class="form-control btn btn-outline-primary" value="{{this.startDate}}"
+                                                onchange="readURL(this);" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="fd-flex flex-column ml-3">
+                                            <label for="endDate">End Date</label>
+                                            <input type='date' id="endDate" name="resume[School][endDate]" class="form-control btn btn-outline-primary" value="{{this.endDate}}"
+                                                onchange="readURL(this);" />
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <br>
+                    {{/each}}
+                    {{/if}}
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+                <br>
+                <br>
+            {{/each}}
+        </div>
+      <div class="modal-footer">
+        {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+  <!-- Site footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2019 All Rights Reserved by STEMconnect
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-github"></i></a></li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>
+
+<!-- Modal Add Resume Information-->
+<div class="modal fade bd-example-modal-lg" id="addResume" tabindex="-1" role="dialog" aria-labelledby="addResume" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Personal Information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/profile/addResume" method="post">
+            <div class="row">
+                    {{!-- Profile End --}}
+                <div class="col-md-12 d-flex justify-content-between align-items-start">
+                    <div class="full-width">
+                        <div class="d-flex flex-column" id="resume">
+                            <div class="d-flex flex-row">
+                                <h4 class="text-left" for="profile">Resume Information</h4>
+                            
+                            </div>
+                            <div id="education-wrapper" class="d-flex flex-column form-group">
+                                <div class="d-flex py-2">
+                                    <button class="btn btn-primary" onclick="addMoreEducation()" type="button">Add Education Information</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="skills">Skills</label>
+                                <input type="text" class="form-control" id="skills" name="resume[skills]" placeholder="" required>
+                            </div>
+                            <div class="dropdown form-group d-flex flex-column">
+                                        <label for="workStatus">Work Status</label>
+                                        <select style="width: 200px;" class="text-right btn btn-secondary dropdown-toggle"
+                                            type="button" id="workStatus" name="resume[workStatus]"
+                                            data-toggle="dropdown">
+                                            <option disabled selected value> -- select an option -- </option>
+                                            <option value="Employed">Employed</option>
+                                            <option value="Unemployed">Unemployed</option>
+                                        </select>
+                            </div>
+                            <div class="form-group d-flex flex-column">
+                                <label for="ConfirmPassword">Resume</label>
+                                <div>
+                                    <input type='file' multiple class="btn btn-outline-primary my-3 filePond"
+                                        onchange="readURL(this);" name="resume[resumeUrl]" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ConfirmPassword">Years of Experience</label>
+                                <input type="number" class="form-control" id="yearsOfExperience" name="resume[year]"
+                                    placeholder="" required>
+                            </div>
+                        
+                        <div id="project-wrapper" class="d-flex flex-column">
+                        <div class="d-flex py-2">
+                            <button class="btn btn-primary" onclick="addMoreProject()" type="button">Add Project Information</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-12">
+                <br/>
+                    <hr>
+                <br/>
+                </div>
+                {{!-- <div class="d-flex flex-column col-md-12">
+                    <div class="">
+                        <div class="d-flex flex-column" id="resume">
+                            <div class="d-flex flex-row">
+                                <h4 class="text-left" for="profile">Work Information</h4>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="resumeActive">
+                                </div>
+                            </div>
+                                <div id="work-information-wrapper" class=" d-flex flex-column fWrap">
+                                <div class="d-flex py-2">
+                                    <button class="btn btn-primary" onclick="addMoreWorkInformation()" type="button">Add Work Information</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                                
+            
+            <div class="col-md-12 d-flex justify-content-end p-2 px-3">
+                <a href="/profile" class="btn btn-primary px-5 mx-3"> Cancel </a>
+                <button class="btn btn-primary px-5" type="submit">Save</button>
+            </div>
+            
+        </form>
+    </div>
+  </div>
+</div>
+</div>
+<script data-main="js/app.js" src="js/require.js"></script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+function addMoreWorkInformation() {
+       let wrapper = $('#work-information-wrapper');
+        let html = `<div class="col-md-12 py-2 d-flex justify-content-between align-items-center clone fWrap">
+                    <div class="col-md-12">
+                     <span class="remove-Work">remove</span>
+                        <div class="d-flex flex-column" id="workInformation">
+                            <div class="form-group">
+                                <label for="companyName">Company Name</label>
+                                <input type="text" class="form-control" id="companyName" name="workDes[companyName]"
+                                    placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobTitle">Job Title</label>
+                                <input type="text" class="form-control" id="jobTitle" name="workDes[jobTitle]" placeholder="" required>
+                            </div>
+                             <div class="form-group">
+                                <label for="workStartDate">Start Date</label>
+                                <div>
+                                    <input type='date' id="workStartDate" name="workDes[workStartDate]"
+                                        class="btn btn-outline-primary my-3" onchange="readURL(this);" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="workEndDate">End Date</label>
+                                <div>
+                                    <input type='date' id="workEndDate" name="workDes[workEndDate]" class="btn btn-outline-primary my-3"
+                                        onchange="readURL(this);" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            <label for="description">Job Description</label>
+                            <textarea class="form-control" columns="5" id="description" name="workDes[WorkDescription]"
+                                placeholder=""></textarea>
+                        </div>
+                    </div>     
+                </div>`;
+        wrapper.append(html);
+    }
+    $(document).on("click", ".clone .remove-Work", function (e) {
+        $(e.target).parent().parent().remove();
+    });
+
+    
+    function addMoreProject() {
+        let wrapper = $('#project-wrapper');
+        let html = `<div class="col-md-12 py-2 d-flex justify-content-between align-items-center clone">
+                    <div class="col-md-5">
+                       <span class="remove-Work">remove</span>
+                        <div class="d-flex" id="project">
+                            <div class="d-flex flex-column">
+                                <div class="form-group">
+                                    <label for="ConfirmPassword">Project Title</label>
+                                    <input type="text" class="form-control" id="projectTitle" name="project[projectTitle]"
+                                        placeholder="" required>
+                                </div>
+                                <div class="form-group">
+                        <label for="projectDesc">Project Description</label>
+                        <input type="text" class="form-control" id="projectDesc" name="project[projectDesc]" placeholder="" required>
+                    </div>
+                                <div class="d-flex">
+                                    <div class="fd-flex flex-column">
+                                        <label for="ConfirmPassword">Start Date</label>
+                                        <div>
+                                            <input type='date' id="projectStartDate" name="project[startDate]"
+                                                class="btn btn-outline-primary my-3" onchange="readURL(this);" required />
+                                        </div>
+                                    </div>
+                                    <div class="fd-flex pl-2 flex-column">
+                                        <label for="ConfirmPassword">End Date</label>
+                                        <div>
+                                            <input type='date' id="projectEndDate" name="project[endDate]"
+                                                class="btn btn-outline-primary my-3" onchange="readURL(this);" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>`;
+        wrapper.append(html);
+    }
+ 
+
+     function addMoreEducation() {
+        let wrapper = $('#education-wrapper');
+        let html = `<div class="col-md-12 py-2 d-flex justify-content-between align-items-center clone">
+                    <div class="col-md-5">
+                       <span class="remove-Work">remove</span>
+                        <div class="d-flex" id="project">
+                            <div class="d-flex flex-column">
+                                <div class="form-group">
+                                        <label for="schoolName">School Name</label>
+                                        <input type="text" class="form-control" id="schoolName" name="School[schoolName]" value="{{this.schoolName}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gpa">G.P.A</label>
+                                        <input type="number" step="0.01" min="0.01" max="4.00" class="form-control" id="gpa" name="School[gpa]" value="{{this.gpa}}" required>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                                                <div class="col-md-6">
+                                <div class="form-group">
+                                        <div class="fd-flex flex-column ml-3">
+                                            <label for="startDate">Start Date</label>
+                                            <input type='date' id="startDate" name="School[startDate]" class="form-control btn btn-outline-primary" value="{{this.startDate}}"
+                                                onchange="readURL(this);" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="fd-flex flex-column ml-3">
+                                            <label for="endDate">End Date</label>
+                                            <input type='date' id="endDate" name="School[endDate]" class="form-control btn btn-outline-primary" value="{{this.endDate}}"
+                                                onchange="readURL(this);" required />
+                                        </div>
+                                    </div>
+                            </div>
+                </div>`;
+        wrapper.append(html);
+    }
+</script>
+
+{{!-- <script src="/public/js/company.js"></script> --}}

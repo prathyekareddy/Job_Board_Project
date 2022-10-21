@@ -1,0 +1,74 @@
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-center">
+    {{#if auth}}
+        {{> navigationAuthPartial }}
+    {{else}}
+        {{> navigationUnauthPartial }}
+    {{/if}}
+</nav>
+<main id="signupContainer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_q5pk6p1k.json" background="transparent"  speed="1"  style="height:70%; margin-left: 5vh;padding-top:5vh;" loop autoplay></lottie-player>
+                </div>
+            <div class="col-md-5">
+                        <div class = "divForm">
+            <form action="/signup" method="POST" class="signup-form" id="signup-form">
+            <div id = "form"> 
+            <h4 class = "first">Sign Up</h4>            
+            <div class="form-group">
+                <label>Username</label>
+                    <input type="text" id="username" name="username" placeholder="Username" value="{{signup.username}}" class="full-width-input form-control"/>
+                <div class="error-username" id="error-username"></div>
+                </div>
+                E-mail: 
+                <div class="form-group">
+                <input type="email" id="email" name="email" placeholder="Email" value="{{signup.email}}" class="full-width-input form-control"/>
+                <div class="error-email" id="error-email"></div>
+                </div>
+                {{!-- Password:
+                <br>
+                <input type="password" id="password" name="password" placeholder="Password" value="{{signup.password}}" class="full-width-input"/>
+                <span class="error-password" id="error-password" ></span> 
+                <br>
+                Confirm Password:
+                <br>
+                <input type="password" id="reEnterPassword" name="reEnterPassword" placeholder="Confirm Password" value="{{signup.reEnterPassword}}" class="full-width-input"/>
+                <span class="error-reEnterPassword" id="error-reEnterPassword" ></span> --}}
+                
+                <div id="sam">
+                <h5>Sign up as</h5>
+                
+                <div>
+                    <input type="radio" id="usertype" checked="checked" value="employee" name="usertype"> 
+                    <label for="usertype"> Employee </label>
+                    
+                </div>
+ 
+                <div>
+                    <input id="company" type="radio"  value="company" name="usertype"> 
+                    <label for="company"> Company</label>
+                </div>
+            </div>
+            <div class="error-form" id="error-form"></div>
+            {{#if hasError}}
+            <div class="error-form error" id="error-validationform">Username or Email already exists. Try with different username and email</div>
+            {{/if}}
+                <button class="btnSignUp" type="submit">Sign Up</button>
+            </div>
+            </form>
+        </div>
+            </div>
+        </div>
+    </div>
+
+        <script src="/public/js/signup.js"></script>
+</main>
+</div>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script type="text/javascript">
+  function resizeIframe(iframe) {
+    iframe.height = iframe.contentWindow.document.body.scrollHeight + "px";
+  }
+</script>
